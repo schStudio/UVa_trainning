@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#define maxn 85
+
+const double C = 12.01;
+const double H = 1.008;
+const double O = 16.00;
+const double N = 14.01;
+
+int toNum( const char* s, int pos )
+{
+	if( isalpha(s[pos]) || pos == strlen(s) )
+		return 1;
+	int ans = s[pos]-'0';
+	while( isdigit(s[++pos]) )
+		ans = ans*10 + s[pos]-'0';
+	return ans;
+}
+void solve()
+{
+	double ans = 0;
+	char s[maxn];
+	scanf("%s", s);
+	int len = strlen(s);
+	for( int i = 0; i < len; ++i ) {
+		if( isalpha(s[i]) ) {
+			switch( s[i] ) {
+				case 'C': ans += C * toNum(s,i+1); break;
+				case 'H': ans += H * toNum(s,i+1); break;
+				case 'O': ans += O * toNum(s,i+1); break;
+				case 'N': ans += N * toNum(s,i+1); break;
+			}
+		}
+	}
+	printf("%.3f\n", ans);
+}
+int main()
+{
+	//freopen( "in", "r", stdin );
+	int T;
+	scanf("%d", &T);
+	while( T-- ) {
+		solve();
+	}
+	return 0;
+}
